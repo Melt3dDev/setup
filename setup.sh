@@ -15,7 +15,7 @@ sudo rm /usr/share/plymouth/themes/armbian/bgrt-fallback.png
 sudo cp bgrt-fallback.png /usr/share/plymouth/themes/armbian/
 sudo rm /usr/share/plymouth/themes/armbian/watermark.png
 sudo cp watermark.png /usr/share/plymouth/themes/armbian/
-sudo rm /boot/armbiainEnv.txt
+sudo rm /boot/armbianEnv.txt
 sudo cp armbianEnv.txt /boot/
 sudo rm /boot/system.cfg
 sudo cp system.cfg /boot/

@@ -28,20 +28,20 @@ read -p "Press enter to start flashing klipper to Manta"
 sudo dfu-util -a 0 -d 0483:df11 --dfuse-address 0x08020000 -D ~/setup/klipper_manta.bin
 echo "Reset Manta again"
 echo -e "\e[1m\e[32m ----Flashing EBB Can---- \e[0m"
-echo "Connect EBB Can via USB and put it into boot mode"
+echo "Reset Manta. Connect EBB Can via USB and put it into boot mode"
 read -p "Press enter to start flashing katapult to EBB Can"
 sudo dfu-util -a 0 -D ~/setup/katapult_can.bin --dfuse-address 0x08000000:force:leave -d 0483:df11
-echo "Reset EBB Can, then put it into boot mode"
-sudo dfu-util -a 0 -d 0483:df11 --dfuse-address 0x08002000 -D ~/klipper_can.bin
+read -p "Reset EBB Can, then put it into boot mode"
+sudo dfu-util -a 0 -d 0483:df11 --dfuse-address 0x08002000 -D ~/setup/klipper_can.bin
 read -p "Disconnect EBB Can USB then press enter"
 sudo ifup can0
 echo -e "\e[1m\e[32m ----Querying Manta UUID---- \e[0m"
-manta_uuid_querry=( $(python3 ~/setup/katapult/scripts/flash_can.py -q) )
+manta_uuid_querry=( $(python3 ~/setup/flash_can.py -q) )
 manta_uuid=( $(echo ${manta_uuid_querry[11]::-1}) )
 echo Manta UUID: $manta_uuid
 read -p "Connect EBB Can via cable then press enter"
 echo "Querying EBB Can UUID"
-can_uuid_querry=( $(python3 ~/setup/katapult/scripts/flash_can.py -q) )
+can_uuid_querry=( $(python3 ~/setup/flash_can.py -q) )
 can_uuid=( $(echo ${manta_uuid_querry[16]::-1}) )
 echo Manta UUID: $can_uuid
 echo -e "\e[1m\e[32m ----Setting Manta uuid---- \e[0m"

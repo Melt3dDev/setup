@@ -4,7 +4,7 @@ sudo apt-get upgrade -y
 cd
 echo -e "\e[1m\e[32m ----Downloading modified Klipper---- \e[0m"
 rm -rf klipper
-git clone https://github.com/Melt3dDev/klipper
+git clone -b dev https://github.com/Melt3dDev/klipper
 cd setup
 echo -e "\e[1m\e[32m ----Flashing Manta---- \e[0m"
 echo "Put Manta into boot mode"

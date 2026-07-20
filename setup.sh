@@ -39,7 +39,8 @@ echo canbus_interface: can0 >> temp.cfg
 tail -n +11 ./printer.cfg >> temp.cfg
 mv temp.cfg printer.cfg
 echo -e "\e[1m\e[32m ----Setting EBB Can uuid---- \e[0m"
-echo [mcu EBBCan] >> can.cfg
+echo " " >> can.cfg
+echo "[mcu EBBCan]" >> can.cfg
 echo canbus_uuid: $can_uuid >> can.cfg
 echo canbus_interface: can0 >> can.cfg
 echo -e "\e[1m\e[32m ----Copying Klipper config, Mainsail theme and Plymouth theme---- \e[0m"
@@ -47,6 +48,7 @@ rm /home/biqu/printer_data/config/printer.cfg
 rm /home/biqu/printer_data/config/KlipperScreen.cfg
 cp KlipperScreen.cfg /home/biqu/printer_data/config/KlipperScreen.cfg
 cp printer.cfg /home/biqu/printer_data/config/
+cp Orbiter2_SmartSensor.cfg /home/biqu/printer_data/config/
 cp can.cfg /home/biqu/printer_data/config/
 cp -r .theme /home/biqu/printer_data/config/
 cp bed_angle.py /home/biqu/KlipperScreen/panels

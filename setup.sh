@@ -46,7 +46,9 @@ echo canbus_interface: can0 >> can.cfg
 echo -e "\e[1m\e[32m ----Copying Klipper config, Mainsail theme and Plymouth theme---- \e[0m"
 rm /home/biqu/printer_data/config/printer.cfg
 rm /home/biqu/printer_data/config/KlipperScreen.cfg
-cp KlipperScreen.cfg /home/biqu/printer_data/config/KlipperScreen.cfg
+rm /home/biqu/KlipperScreen/styles/z-bolt/style.css
+cp style.css /home/biqu/KlipperScreen/styles/z-bolt/
+cp KlipperScreen.cfg /home/biqu/printer_data/config/
 cp printer.cfg /home/biqu/printer_data/config/
 cp Orbiter2_SmartSensor.cfg /home/biqu/printer_data/config/
 cp can.cfg /home/biqu/printer_data/config/
@@ -56,10 +58,10 @@ sudo rm /usr/share/plymouth/themes/armbian/bgrt-fallback.png
 sudo cp bgrt-fallback.png /usr/share/plymouth/themes/armbian/
 sudo rm /usr/share/plymouth/themes/armbian/watermark.png
 sudo cp watermark.png /usr/share/plymouth/themes/armbian/
-#sudo rm /boot/armbianEnv.txt
-#sudo cp armbianEnv.txt /boot/
-#sudo rm /boot/system.cfg
-#sudo cp system.cfg /boot/
+sudo rm /boot/armbianEnv.txt
+sudo cp armbianEnv.txt /boot/
+sudo rm /boot/system.cfg
+sudo cp system.cfg /boot/
 sudo systemctl disable NetworkManager-wait-online.service
 echo -e "\e[1m\e[32m ----Restarting Klipper---- \e[0m"
 sudo systemctl restart klipper

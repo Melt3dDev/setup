@@ -1,7 +1,8 @@
-verbosity=1
+verbosity=0
 bootlogo=true
 disp_mode=1024x600p60
 overlay_prefix=sun50i-h616
+extraargs=quiet
 #------------------------------------------------#
 ## 'cb1-sd.dtb' for CB1, 'cb1-emmc.dtb' for CB1 eMMC version
 fdtfile=sun50i-h616-bigtreetech-cb1-sd.dtb

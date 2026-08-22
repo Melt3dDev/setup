@@ -7,26 +7,28 @@ rm -rf klipper
 git clone -b dev https://github.com/Melt3dDev/klipper
 cd setup
 echo -e "\e[1m\e[32m ----Flashing Manta---- \e[0m"
-echo "Put Manta into boot mode"
+echo -e "\e[1m\e[33m Put Manta into boot mode (Hold BOOT0 and short press RESET, after that release BOOT0) \e[0m"
 read -p "Press enter to start flashing katapult to Manta"
 sudo dfu-util -a 0 -D ~/setup/katapult_manta.bin --dfuse-address 0x08000000:force:leave -d 0483:df11
-echo "Reset Manta, then put it into boot mode"
+echo -e "\e[1m\e[33m Reset Manta (short press RESET), then put it into boot mode (Hold BOOT0 and short press RESET, after that release BOOT0) \e[0m"
 read -p "Press enter to start flashing klipper to Manta"
 sudo dfu-util -a 0 -d 0483:df11 --dfuse-address 0x08020000 -D ~/setup/klipper_manta.bin
-echo "Reset Manta again"
 echo -e "\e[1m\e[32m ----Flashing EBB Can---- \e[0m"
-echo "Reset Manta. Connect EBB Can via USB and put it into boot mode"
+echo -e "\e[1m\e[33m Reset Manta (short press RESET). Connect EBB Can via USB and CAN cable and put it into boot mode (Hold BOOT and short press RST, after that release BOOT) \e[0m"
 read -p "Press enter to start flashing katapult to EBB Can"
 sudo dfu-util -a 0 -D ~/setup/katapult_can.bin --dfuse-address 0x08000000:force:leave -d 0483:df11
-read -p "Reset EBB Can, then put it into boot mode"
+echo -e "\e[1m\e[33m Reset EBB Can (short press RST) and put it into boot mode (Hold BOOT and short press RST, after that release BOOT) \e[0m"
+read -p "Press enter to start flashing klipper to EBB Can"
 sudo dfu-util -a 0 -d 0483:df11 --dfuse-address 0x08002000 -D ~/setup/klipper_can.bin
-read -p "Disconnect EBB Can USB then press enter"
+echo -e "\e[1m\e[33m Disconnect EBB Can USB and CAN cable \e[0m"
+read -p "Press enter when ready"
 sudo ifup can0
 echo -e "\e[1m\e[32m ----Querying Manta UUID---- \e[0m"
 manta_uuid_querry=( $(python3 ~/setup/flash_can.py -q) )
 manta_uuid=( $(echo ${manta_uuid_querry[11]::-1}) )
 echo Manta UUID: $manta_uuid
-read -p "Connect EBB Can via cable then press enter"
+echo -e "\e[1m\e[33m Connect EBB Can via CAN cable \e[0m"
+read -p "Press enter when ready"
 echo "Querying EBB Can UUID"
 can_uuid_querry=( $(python3 ~/setup/flash_can.py -q) )
 can_uuid=( $(echo ${can_uuid_querry[16]::-1}) )

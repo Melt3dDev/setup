@@ -1,6 +1,7 @@
 echo -e "\e[1m\e[32m ----Updating System---- \e[0m"
 sudo apt-get update -y
 sudo apt-get upgrade -y
+sudo apt-get install -y libwebsockets-dev libsrtp2-dev libusrsctp-dev libnice-dev libconfig-dev
 cd
 echo -e "\e[1m\e[32m ----Downloading modified Klipper---- \e[0m"
 rm -rf /home/biqu/klipper
@@ -81,7 +82,7 @@ echo -e "\e[1m\e[32m ----Installing Obico---- \e[0m"
 cd ~
 git clone https://github.com/TheSpaghettiDetective/moonraker-obico.git
 cd moonraker-obico
-./install.sh -L -H 127.0.0.1 -p 7125 -C /home/biqu/printer_data/config/moonraker.conf -l /home/biqu/printer_data/logs -S https://meltvm.chocolate-cliff.ts.net
+./install.sh -L -H 127.0.0.1 -p 7125 -C /home/biqu/printer_data/config/moonraker.conf -l /home/biqu/printer_data/logs -S https://cloud.melt3d.eu
 echo "biqu ALL=(root) NOPASSWD: /usr/bin/systemctl stop moonraker-obico, /usr/bin/systemctl restart moonraker-obico" | sudo tee /etc/sudoers.d/klipperscreen-obico
 sudo chmod 0440 /etc/sudoers.d/klipperscreen-obico
 echo -e "\e[1m\e[32m ----Restarting Klipper---- \e[0m"

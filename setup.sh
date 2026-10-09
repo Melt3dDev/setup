@@ -80,7 +80,7 @@ sudo chmod +x /usr/local/bin/tzupdate
 sudo tzupdate
 echo -e "\e[1m\e[32m ----Installing Obico---- \e[0m"
 cd ~
-git clone https://github.com/TheSpaghettiDetective/moonraker-obico.git
+git clone https://github.com/Melt3dDev/moonraker-obico
 cd moonraker-obico
 ./install.sh -L -H 127.0.0.1 -p 7125 -C /home/biqu/printer_data/config/moonraker.conf -l /home/biqu/printer_data/logs -S https://cloud.melt3d.eu
 echo "biqu ALL=(root) NOPASSWD: /usr/bin/systemctl stop moonraker-obico, /usr/bin/systemctl restart moonraker-obico" | sudo tee /etc/sudoers.d/klipperscreen-obico

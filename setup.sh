@@ -54,6 +54,7 @@ cp KlipperScreen.conf /home/biqu/printer_data/config/
 ln -s /home/biqu/klipper/config/printer.cfg printer.cfg
 cp Orbiter2_SmartSensor.cfg /home/biqu/printer_data/config/
 cp crowsnest.conf /home/biqu/printer_data/config/
+cp save_config /home/biqu/printer_data/config/
 ln -s /home/biqu/klipper/config/can.cfg can.cfg
 cp -r .theme /home/biqu/printer_data/config/
 sudo rm /usr/share/plymouth/themes/armbian/bgrt-fallback.png

@@ -2,10 +2,11 @@ echo -e "\e[1m\e[32m ----Updating System---- \e[0m"
 sudo apt-get update -y
 sudo apt-get upgrade -y
 sudo apt-get install -y libwebsockets-dev libsrtp2-dev libusrsctp-dev libnice-dev libconfig-dev
+sudo dpkg -i janus.deb
 cd
 echo -e "\e[1m\e[32m ----Downloading modified Klipper---- \e[0m"
 rm -rf /home/biqu/klipper
-git clone -b dev https://github.com/Melt3dDev/klipper
+git clone https://github.com/Melt3dDev/klipper
 rm -rf /home/biqu/KlipperScreen
 git clone https://github.com/Melt3dDev/KlipperScreen
 cd setup
@@ -37,26 +38,23 @@ can_uuid_querry=( $(python3 ~/setup/flash_can.py -q) )
 can_uuid=( $(echo ${can_uuid_querry[16]::-1}) )
 echo Can UUID: $can_uuid
 echo -e "\e[1m\e[32m ----Setting Manta uuid---- \e[0m"
-head -n 9 ./printer.cfg > temp.cfg
-echo [mcu] >> temp.cfg
-echo canbus_uuid: $manta_uuid >> temp.cfg
-echo canbus_interface: can0 >> temp.cfg
-tail -n +11 ./printer.cfg >> temp.cfg
-mv temp.cfg printer.cfg
+echo [mcu] >> can_uuids.cfg
+echo canbus_uuid: $manta_uuid >> can_uuids.cfg
+echo canbus_interface: can0 >> can_uuids.cfg
 echo -e "\e[1m\e[32m ----Setting EBB Can uuid---- \e[0m"
-echo " " >> can.cfg
-echo "[mcu EBBCan]" >> can.cfg
-echo canbus_uuid: $can_uuid >> can.cfg
-echo canbus_interface: can0 >> can.cfg
+echo " " >> can_uuids.cfg
+echo "[mcu EBBCan]" >> can_uuids.cfg
+echo canbus_uuid: $can_uuid >> can_uuids.cfg
+echo canbus_interface: can0 >> can_uuids.cfg
 echo -e "\e[1m\e[32m ----Copying Klipper config, Mainsail theme and Plymouth theme---- \e[0m"
 rm /home/biqu/printer_data/config/printer.cfg
 rm /home/biqu/printer_data/config/KlipperScreen.conf
 rm /home/biqu/printer_data/config/crowsnest.conf
 cp KlipperScreen.conf /home/biqu/printer_data/config/
-cp printer.cfg /home/biqu/printer_data/config/
+ln -s /home/biqu/klipper/config/printer.cfg printer.cfg
 cp Orbiter2_SmartSensor.cfg /home/biqu/printer_data/config/
 cp crowsnest.conf /home/biqu/printer_data/config/
-cp can.cfg /home/biqu/printer_data/config/
+ln -s /home/biqu/klipper/config/can.cfg can.cfg
 cp -r .theme /home/biqu/printer_data/config/
 sudo rm /usr/share/plymouth/themes/armbian/bgrt-fallback.png
 sudo cp bgrt-fallback.png /usr/share/plymouth/themes/armbian/
